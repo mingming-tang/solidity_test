@@ -99,9 +99,7 @@ describe("Lock", function () {
         const { lock, unlockTime, lockedAmount } = await loadFixture(
           deployOneYearLockFixture
         );
-
         await time.increaseTo(unlockTime);
-
         await expect(lock.withdraw())
           .to.emit(lock, "Withdrawal")
           .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
@@ -113,9 +111,7 @@ describe("Lock", function () {
         const { lock, unlockTime, lockedAmount, owner } = await loadFixture(
           deployOneYearLockFixture
         );
-
         await time.increaseTo(unlockTime);
-
         await expect(lock.withdraw()).to.changeEtherBalances(
           [owner, lock],
           [lockedAmount, -lockedAmount]
